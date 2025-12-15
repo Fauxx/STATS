@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>S.T.A.T. Oversight</title>
+  
+  <meta http-equiv="refresh" content="900">
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    /* --- THEME CONFIGURATION --- */
+    :root {
+      --bg-body: #0b0c0f;      
+      --bg-panel: #111217;     
+      --bg-header: #141619;    
+      --border: 1px solid #2c3235;
+      
+      --text-main: #c7d0d9;
+      --text-muted: #6e7681;
+      --accent-green: #73bf69;
+      
+      --font-ui: 'Inter', sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+    }
+
+    * { box-sizing: border-box; }
+    
+    body {
+      margin: 0; padding: 0;
+      background-color: var(--bg-body);
+      color: var(--text-main);
+      font-family: var(--font-ui);
+      overflow-y: auto; 
+      height: auto;
+      min-height: 100vh;
+      padding-bottom: 80px;
+    }
+
+    /* --- NAVBAR --- */
+    .navbar {
+      height: 60px;
+      background-color: var(--bg-header);
+      border-bottom: var(--border);
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 30px;
+      margin-bottom: 24px;
+    }
+    .brand-text { font-weight: 800; font-size: 1rem; letter-spacing: 1.5px; color: #fff; }
+
+    /* --- LAYOUT WRAPPER --- */
+    .container {
+      width: 96%;
+      max-width: 1800px;
+      margin: 0 auto;
+      display: flex; flex-direction: column;
+      gap: 24px;
+    }
+
+    /* --- TOP SECTION (Map + Sidebar) --- */
+    .top-deck {
+      display: grid;
+      grid-template-columns: 2.5fr 1fr; 
+      gap: 24px;
+      height: 800px; 
+    }
+
+    .sidebar-col {
+      display: flex; flex-direction: column;
+      gap: 24px;
+      height: 100%;
+    }
+    
+    .box-stats { height: 200px; flex-shrink: 0; }
+    .box-triage { flex-grow: 1; }
+
+    /* --- BOTTOM SECTION (Graphs) --- */
+    .bottom-deck {
+      display: grid;
+      grid-template-columns: 1fr 1fr; 
+      gap: 24px;
+      height: 500px; 
+    }
+
+    /* --- CARD STYLING --- */
+    .card {
+      background-color: var(--bg-panel);
+      border: var(--border);
+      border-radius: 4px;
+      display: flex; flex-direction: column;
+      overflow: hidden;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+    }
+
+    /* Professional Header with Flexbox for Filter Alignment */
+    .card-header {
+      height: 48px; /* Slightly taller to fit dropdown */
+      background: rgba(255,255,255,0.02);
+      border-bottom: var(--border);
+      display: flex; align-items: center; justify-content: space-between; /* Pushes filter to right */
+      padding: 0 16px;
+    }
+    
+    .card-title {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      font-weight: 700;
+      color: var(--text-muted);
+      letter-spacing: 1px;
+    }
+
+    .card-body {
+      flex-grow: 1;
+      background: #000;
+      position: relative;
+    }
+    
+    iframe { width: 100%; height: 100%; border: none; display: block; }
+
+    /* --- MINI DROPDOWN (Inside Card) --- */
+    .mini-select {
+      background: #0b0c0f;
+      color: var(--text-main);
+      border: 1px solid #333;
+      padding: 4px 12px;
+      font-size: 0.75rem;
+      border-radius: 3px;
+      font-family: var(--font-mono);
+      outline: none;
+      cursor: pointer;
+      min-width: 150px;
+    }
+    .mini-select:hover { border-color: var(--accent-green); }
+
+  </style>
+</head>
+<body>
+
+  <nav class="navbar">
+    <div class="brand-text">S.T.A.T. MISSION CONTROL</div>
+  </nav>
+
+  <div class="container">
+
+    <div class="top-deck">
+      
+      <div class="card">
+        <div class="card-header">
+          <span class="card-title">:: LIVE GEOSPATIAL TRACKING</span>
+        </div>
+        <div class="card-body">
+          <iframe src="http://13.211.90.32:3000/grafana/d-solo/adphjqq/rescue-map?orgId=1&from=now-5m&to=now&refresh=5s&theme=dark&panelId=panel-1&__feature.dashboardSceneSolo=true"></iframe>
+        </div>
+      </div>
+
+      <div class="sidebar-col">
+        <div class="card box-stats">
+          <div class="card-header">
+            <span class="card-title">:: SYSTEM STATUS</span>
+          </div>
+          <div class="card-body">
+            <iframe src="http://13.211.90.32:3000/grafana/d-solo/adphjqq/rescue-map?orgId=1&from=now-5m&to=now&refresh=5s&theme=dark&panelId=panel-5&__feature.dashboardSceneSolo=true"></iframe>
+          </div>
+        </div>
+        <div class="card box-triage">
+          <div class="card-header">
+            <span class="card-title">:: ACTIVE TRIAGE QUEUE</span>
+          </div>
+          <div class="card-body">
+            <iframe src="http://13.211.90.32:3000/grafana/d-solo/adphjqq/rescue-map?orgId=1&from=now-5m&to=now&refresh=5s&theme=dark&panelId=panel-4&__feature.dashboardSceneSolo=true"></iframe>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="bottom-deck">
+      
+      <div class="card">
+        <div class="card-header">
+          <span class="card-title">:: SPO2 SATURATION (%)</span>
+          <select id="ox-select" class="mini-select">
+            <option value="$__all">SHOW ALL</option>
+            <option value="V_RED">DEVICE: V_RED</option>
+            <option value="V_YELLOW">DEVICE: V_YELLOW</option>
+            <option value="V_GREEN">DEVICE: V_GREEN</option>
+          </select>
+        </div>
+        <div class="card-body">
+          <iframe id="frame-ox" 
+            src="http://13.211.90.32:3000/grafana/d-solo/adphjqq/rescue-map?orgId=1&from=now-5m&to=now&refresh=5s&theme=dark&panelId=panel-3&__feature.dashboardSceneSolo=true&var-ID=$__all">
+          </iframe>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="card-title">:: HEART RATE (BPM)</span>
+          <select id="hr-select" class="mini-select">
+            <option value="$__all">SHOW ALL</option>
+            <option value="V_RED">DEVICE: V_RED</option>
+            <option value="V_YELLOW">DEVICE: V_YELLOW</option>
+            <option value="V_GREEN">DEVICE: V_GREEN</option>
+          </select>
+        </div>
+        <div class="card-body">
+          <iframe id="frame-hr" 
+            src="http://13.211.90.32:3000/grafana/d-solo/adphjqq/rescue-map?orgId=1&from=now-5m&to=now&refresh=5s&theme=dark&panelId=panel-2&__feature.dashboardSceneSolo=true&var-ID=$__all">
+          </iframe>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+  <script>
+    // --- INDEPENDENT FILTER LOGIC ---
+    
+    // 1. Oxygen Controls
+    const oxSelect = document.getElementById('ox-select');
+    const oxFrame = document.getElementById('frame-ox');
+    const BASE_URL_OX = "http://13.211.90.32:3000/grafana/d-solo/adphjqq/rescue-map?orgId=1&from=now-5m&to=now&refresh=5s&theme=dark&panelId=panel-3&__feature.dashboardSceneSolo=true";
+
+    oxSelect.addEventListener('change', function() {
+      const selectedID = this.value;
+      console.log("Updating Oxygen View to:", selectedID);
+      oxFrame.src = `${BASE_URL_OX}&var-ID=${selectedID}`;
+    });
+
+    // 2. Heart Rate Controls
+    const hrSelect = document.getElementById('hr-select');
+    const hrFrame = document.getElementById('frame-hr');
+    const BASE_URL_HR = "http://13.211.90.32:3000/grafana/d-solo/adphjqq/rescue-map?orgId=1&from=now-5m&to=now&refresh=5s&theme=dark&panelId=panel-2&__feature.dashboardSceneSolo=true";
+
+    hrSelect.addEventListener('change', function() {
+      const selectedID = this.value;
+      console.log("Updating Heart Rate View to:", selectedID);
+      hrFrame.src = `${BASE_URL_HR}&var-ID=${selectedID}`;
+    });
+  </script>
+
+</body>
+</html>
